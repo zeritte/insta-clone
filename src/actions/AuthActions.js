@@ -15,4 +15,7 @@ export const login = (username, password) => async dispatch => {
   }
 };
 
-export const logout = () => dispatch => dispatch({ type: LOG_OUT.success });
+export const logout = () => async dispatch => {
+  await Keychain.resetGenericPassword();
+  dispatch({ type: LOG_OUT.success });
+};
