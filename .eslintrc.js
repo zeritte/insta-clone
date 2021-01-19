@@ -6,5 +6,6 @@ module.exports = {
     "prettier",
     "prettier/react",
     "plugin:react-hooks/recommended"
-  ]
+  ],
+  rules: { "no-alert": "off" }
 };
