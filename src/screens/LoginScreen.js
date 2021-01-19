@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { ZButton, ZLabelInput } from "../components";
 
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/AuthActions";
+import { ZContainer } from "../components/ZContainer";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +17,7 @@ const LoginScreen = () => {
   }, [dispatch, email, pass]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ZContainer>
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>Instagram Clone</Text>
       </View>
@@ -25,7 +26,7 @@ const LoginScreen = () => {
         <ZLabelInput label="Password" value={pass} setValue={setPass} secureTextEntry />
         <ZButton loading={loginLoading} onPress={startLogin} />
       </View>
-    </SafeAreaView>
+    </ZContainer>
   );
 };
 
@@ -34,6 +35,6 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: "center", justifyContent: "center" },
   headerContainer: { flex: 1, justifyContent: "center" },
-  headerText: { fontSize: 28 },
-  inputAreaContainer: { flex: 2 }
+  headerText: { fontSize: 28, textAlign: "center" },
+  inputAreaContainer: { flex: 2, width: "100%" }
 });
