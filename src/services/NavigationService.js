@@ -10,11 +10,11 @@ import MainScreen from "../screens/MainScreen";
 const Stack = createStackNavigator();
 
 export const NavigationService = () => {
-  const loggedIn = useSelector(state => state.auth.loggedIn);
+  const uid = useSelector(state => state.auth.uid);
 
   return (
     <NavigationContainer>
-      {loggedIn ? (
+      {uid ? (
         <Stack.Navigator headerMode="none">
           <Stack.Screen options={{ animationEnabled: false }} name="Main" component={MainScreen} />
         </Stack.Navigator>
