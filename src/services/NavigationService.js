@@ -1,16 +1,31 @@
 import "react-native-gesture-handler";
-import React from "react";
+import React, { useMemo } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import * as Keychain from "react-native-keychain";
 
 import LoginScreen from "../screens/LoginScreen";
 import MainScreen from "../screens/MainScreen";
 
+import { login } from "../actions/AuthActions";
+import { captureError } from "../helpers";
+
 const Stack = createStackNavigator();
 
 export const NavigationService = () => {
-  const uid = useSelector(state => state.auth.uid);
+  const dispatch = useDispatch();
+  const uid = useSelector(state => state.auth.uid); // unique user id
+
+  // use memo only runs once
+  useMemo(async () => {
+    try {
+      const credentials = await Keychain.getGenericPassword();
+      if (credentials) dispatch(login(credentials.username, credentials.password));
+    } catch (error) {
+      captureError(error);
+    }
+  }, [dispatch]);
 
   return (
     <NavigationContainer>
