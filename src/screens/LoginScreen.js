@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { ZButton, ZLabelInput } from "../components";
 
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/AuthActions";
-import { ZButton, ZLabelInput } from "../components";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
