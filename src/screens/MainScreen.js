@@ -1,11 +1,18 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../actions/AuthActions";
 
 const MainScreen = () => {
+  const dispatch = useDispatch();
   return (
-    <View>
+    <SafeAreaView>
       <Text>Main Screen</Text>
-    </View>
+      <Pressable onPress={() => dispatch(logout())}>
+        <Text>logout</Text>
+      </Pressable>
+    </SafeAreaView>
   );
 };
 
