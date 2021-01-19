@@ -35,14 +35,5 @@ const styles = StyleSheet.create({
   container: { flex: 1, alignItems: "center", justifyContent: "center" },
   headerContainer: { flex: 1, justifyContent: "center" },
   headerText: { fontSize: 28 },
-  inputAreaContainer: { flex: 2 },
-  inputContainer: {
-    width: "80%",
-    alignSelf: "center",
-    flexDirection: "row",
-    alignItems: "center",
-    marginVertical: 20
-  },
-  labelText: { flex: 1, fontSize: 16 },
-  input: { flex: 2, height: 30, borderWidth: 1 }
+  inputAreaContainer: { flex: 2 }
 });
