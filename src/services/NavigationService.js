@@ -17,7 +17,7 @@ export const NavigationService = () => {
   const dispatch = useDispatch();
   const uid = useSelector(state => state.auth.uid); // unique user id
 
-  // use memo only runs once
+  // use memo only runs once the app starts
   useMemo(async () => {
     try {
       const credentials = await Keychain.getGenericPassword();
