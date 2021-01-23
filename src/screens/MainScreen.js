@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   FlatList,
   Pressable,
@@ -8,23 +8,28 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
-import { ZHeader, ZCard } from "../components";
+import { ZHeader, ZCard, ZSearch } from "../components";
 import { mockData } from "../config";
 
 import { useDispatch, useSelector } from "react-redux";
 
 const MainScreen = () => {
-  const [gridView, setGridView] = useState(false);
+  const [data, setData] = useState(mockData.slice(0, 1));
+  const [gridView, setGridView] = useState(true);
+  const [searchText, setSearchText] = useState("");
   const dispatch = useDispatch();
+
+  const onSearchSubmit = useCallback(() => {
+    setData(mockData.filter(i => i.title.toLowerCase().includes(searchText.toLowerCase())));
+    setGridView(true);
+  }, [searchText]);
 
   return (
     <SafeAreaView style={styles.container}>
       <ZHeader />
-      <TouchableOpacity onPress={() => setGridView(e => !e)}>
-        <Text>wuw</Text>
-      </TouchableOpacity>
+      <ZSearch value={searchText} setValue={setSearchText} onSubmit={onSearchSubmit} />
       <FlatList
-        data={mockData}
+        data={data}
         numColumns={gridView ? 2 : 1}
         key={gridView.toString()} // flatlist doesnt support on the fly numcolumn change, so key prop is added to re-render
         contentContainerStyle={styles.flexGrow}
