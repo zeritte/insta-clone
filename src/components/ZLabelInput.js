@@ -1,12 +1,12 @@
 import React from "react";
 import { View, TextInput, Text, StyleSheet } from "react-native";
 
-export const ZLabelInput = React.memo(({ label, value, setValue, ...rest }) => (
+export const ZLabelInput = ({ label, value, setValue, ...rest }) => (
   <View style={styles.inputContainer}>
     <Text style={styles.labelText}>{label}</Text>
     <TextInput style={styles.input} value={value} onChangeText={e => setValue(e)} {...rest} />
   </View>
-));
+);
 
 const styles = StyleSheet.create({
   inputContainer: {

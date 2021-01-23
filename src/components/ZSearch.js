@@ -2,7 +2,7 @@ import React from "react";
 import { TextInput, View, StyleSheet } from "react-native";
 import { ZButton } from "./ZButton";
 
-export const ZSearch = React.memo(({ value, setValue, onSubmit }) => (
+export const ZSearch = ({ value, setValue, onSubmit }) => (
   <View style={styles.container}>
     <View style={styles.textInputContainer}>
       <TextInput
@@ -15,7 +15,7 @@ export const ZSearch = React.memo(({ value, setValue, onSubmit }) => (
     </View>
     <ZButton onPress={onSubmit} label="Search" style={styles.searchButton} />
   </View>
-));
+);
 
 const styles = StyleSheet.create({
   container: { flexDirection: "row", marginHorizontal: 10 },
