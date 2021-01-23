@@ -20,7 +20,9 @@ export const ZCard = React.memo(({ data }) => {
           <View key={idx}>
             <Text style={styles.titleText}>{data.title}</Text>
             <ZImage uri={uri} index={idx} />
-            <Text style={styles.notImplementedText}>other little buttons and comment section...</Text>
+            <Text style={styles.notImplementedText}>
+              other little buttons and comment section...
+            </Text>
           </View>
         ))}
       </WrapperComponent>
