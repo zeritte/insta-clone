@@ -26,7 +26,7 @@ export const ZImage = React.memo(({ uri, index }) => {
 
 const styles = StyleSheet.create({
   wrapper: { borderWidth: 1, marginVertical: 20, backgroundColor: "lightgray" },
-  imageContainer: { flex: 1, alignItems: "center" },
+  imageContainer: { flex: 1, alignItems: "center", paddingVertical: 5 },
   image: { flex: 1, height: 150 },
   spinner: { position: "absolute", top: "50%", bottom: "50%", zIndex: 1 }
 });

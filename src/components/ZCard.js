@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView, Text, View, StyleSheet } from "react-native";
+import { ZDot } from "./ZDot";
 import { ZImage } from "./ZImage";
 
 const scrollViewProps = {
@@ -10,22 +11,34 @@ const scrollViewProps = {
 const viewProps = {};
 
 export const ZCard = React.memo(({ data }) => {
-  const WrapperComponent = data.imageUris.length > 1 ? ScrollView : View; // decide on the wrapper
-  const wrapperProps = WrapperComponent === ScrollView ? scrollViewProps : viewProps; // decide on the wrapper props
+  const [galleryIndex, setGalleryIndex] = useState(0);
+  const isGallery = data.imageUris.length > 1;
+  const WrapperComponent = isGallery ? ScrollView : View; // decide on the wrapper
+  const wrapperProps = isGallery ? scrollViewProps : viewProps; // decide on the wrapper props
 
   return (
     <View style={styles.wrapper}>
-      <WrapperComponent {...wrapperProps}>
+      <Text style={styles.titleText}>{data.title}</Text>
+      <WrapperComponent
+        {...wrapperProps}
+        onScroll={e => setGalleryIndex(e.nativeEvent.contentOffset.x === 0 ? 0 : 1)}
+        scrollEventThrottle={0}
+      >
         {data.imageUris.map((uri, idx) => (
           <View key={idx}>
-            <Text style={styles.titleText}>{data.title}</Text>
             <ZImage uri={uri} index={idx} />
-            <Text style={styles.notImplementedText}>
-              other little buttons and comment section...
-            </Text>
           </View>
         ))}
       </WrapperComponent>
+      <View style={styles.dotContainer}>
+        {isGallery &&
+          data.imageUris.map((_, idx) => (
+            <View key={idx}>
+              <ZDot filled={idx === galleryIndex} size={10} />
+            </View>
+          ))}
+      </View>
+      <Text style={styles.notImplementedText}>other little buttons and comment section...</Text>
     </View>
   );
 });
@@ -33,5 +46,6 @@ export const ZCard = React.memo(({ data }) => {
 const styles = StyleSheet.create({
   wrapper: { borderWidth: 1, marginVertical: 20, backgroundColor: "#dbdbdb" },
   titleText: { textAlign: "center", fontSize: 20, paddingVertical: 5 },
-  notImplementedText: { textAlign: "center", fontSize: 10, paddingVertical: 5 }
+  notImplementedText: { textAlign: "center", fontSize: 10, paddingVertical: 5 },
+  dotContainer: { flexDirection: "row", alignSelf: "center" }
 });
