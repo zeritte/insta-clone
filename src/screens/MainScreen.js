@@ -3,7 +3,7 @@ import { ActivityIndicator, FlatList, SafeAreaView, StyleSheet } from "react-nat
 import { ZHeader, ZCard, ZSearch } from "../components";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getData } from "../actions/MainActions";
+import { getData } from "../actions";
 
 const MainScreen = () => {
   const rawData = useSelector(state => state.main.data);

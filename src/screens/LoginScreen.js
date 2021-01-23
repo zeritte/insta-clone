@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { ZButton, ZLabelInput, ZContainer } from "../components";
 
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../actions/AuthActions";
+import { login } from "../actions";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
