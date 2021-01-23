@@ -8,6 +8,7 @@ export const ZSearch = React.memo(({ value, setValue, onSubmit }) => (
       <TextInput
         value={value}
         onChangeText={setValue}
+        autoCapitalize="none"
         placeholder="type to search"
         style={styles.textInput}
       />
