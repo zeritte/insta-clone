@@ -38,7 +38,7 @@ const MainScreen = () => {
         keyExtractor={item => item.key}
         renderItem={({ item }) => <ZCard isGridView={gridView} data={item} />}
         ListEmptyComponent={() =>
-          rawDataLoading ? <ActivityIndicator size="large" style={{ flex: 1 }} /> : null
+          rawDataLoading ? <ActivityIndicator size="large" style={styles.spinner} /> : null
         }
       />
     </SafeAreaView>
@@ -49,5 +49,6 @@ export default MainScreen;
 
 const styles = StyleSheet.create({
   container: { flex: 1, width: "100%", alignItems: "center", justifyContent: "center" },
-  flexGrow: { flexGrow: 1, maxWidth: "100%" }
+  flexGrow: { flexGrow: 1, maxWidth: "100%" },
+  spinner: { flex: 1 }
 });
