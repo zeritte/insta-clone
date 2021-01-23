@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ScrollView, Text, View, StyleSheet } from "react-native";
+import { useGridViewWidth } from "../helpers";
 import { ZDot } from "./ZDot";
 import { ZImage } from "./ZImage";
 
@@ -22,8 +23,9 @@ export const ZCard = React.memo(({ data, isGridView }) => {
       }
     : viewProps; // decide on the wrapper props
 
+  const width = useGridViewWidth(isGridView);
   const gridViewStyles = {
-    width: isGridView ? "50%" : "100%",
+    width: width,
     marginVertical: isGridView ? 0 : 10
   };
 

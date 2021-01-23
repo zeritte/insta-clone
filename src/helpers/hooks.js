@@ -19,7 +19,7 @@ export function useDimensions() {
     Dimensions.addEventListener("change", ({ window: { width, height } }) => {
       if (mounted.current) setDimensions({ width, height });
     });
-    () => {
+    return () => {
       mounted.current = false;
       Dimensions.removeEventListener("change");
     };
@@ -30,6 +30,10 @@ export function useDimensions() {
 
 export function useGridViewWidth(isGridView) {
   const DIMENSIONS = useDimensions();
-  const [width] = useState(isGridView ? DIMENSIONS.width / 2 : DIMENSIONS.width);
+  const [width, setWidth] = useState(isGridView ? DIMENSIONS.width / 2 : DIMENSIONS.width);
+  useEffect(() => {
+    setWidth(isGridView ? DIMENSIONS.width / 2 : DIMENSIONS.width);
+  }, [DIMENSIONS, isGridView]);
+
   return width;
 }

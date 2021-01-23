@@ -14,14 +14,14 @@ import { mockData } from "../config";
 import { useDispatch, useSelector } from "react-redux";
 
 const MainScreen = () => {
-  const [data, setData] = useState(mockData.slice(0, 1));
-  const [gridView, setGridView] = useState(true);
+  const [data, setData] = useState(mockData);
+  const [gridView, setGridView] = useState(false);
   const [searchText, setSearchText] = useState("");
   const dispatch = useDispatch();
 
   const onSearchSubmit = useCallback(() => {
     setData(mockData.filter(i => i.title.toLowerCase().includes(searchText.toLowerCase())));
-    setGridView(true);
+    setGridView(searchText === "" ? false : true);
   }, [searchText]);
 
   return (
