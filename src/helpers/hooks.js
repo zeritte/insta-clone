@@ -8,7 +8,6 @@ export const useOnMount = func => {
 };
 
 export function useOrientation() {
-  console.log("=");
   const [dimensions, setDimensions] = useState(() => ({
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height

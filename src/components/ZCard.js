@@ -1,7 +1,6 @@
 import React from "react";
-import { ActivityIndicator, Pressable, ScrollView, Text, View, StyleSheet } from "react-native";
-import FastImage from "react-native-fast-image";
-import { useOrientation } from "../helpers";
+import { ScrollView, Text, View, StyleSheet } from "react-native";
+import { ZImage } from "./ZImage";
 
 const scrollViewProps = {
   pagingEnabled: true,
@@ -11,23 +10,17 @@ const scrollViewProps = {
 const viewProps = {};
 
 export const ZCard = React.memo(({ data }) => {
-  const DIMENSIONS = useOrientation();
-
   const WrapperComponent = data.imageUris.length > 1 ? ScrollView : View; // decide on the wrapper
   const wrapperProps = WrapperComponent === ScrollView ? scrollViewProps : viewProps; // decide on the wrapper props
+
   return (
-    <View>
-      <WrapperComponent style={styles.wrapper} {...wrapperProps}>
+    <View style={styles.wrapper}>
+      <WrapperComponent {...wrapperProps}>
         {data.imageUris.map((uri, idx) => (
-          <View key={idx} style={[styles.imageContainer, { width: DIMENSIONS.width }]}>
-            <FastImage
-              style={[styles.image, { width: (DIMENSIONS.width * 2) / 3 }]}
-              source={{
-                uri,
-                priority: idx === 0 ? FastImage.priority.high : FastImage.priority.low // images that fill the page first are prioritized
-              }}
-              resizeMode={FastImage.resizeMode.contain}
-            />
+          <View key={idx}>
+            <Text style={styles.titleText}>{data.title}</Text>
+            <ZImage uri={uri} index={idx} />
+            <Text style={styles.notImplementedText}>other little buttons and comment section...</Text>
           </View>
         ))}
       </WrapperComponent>
@@ -36,7 +29,7 @@ export const ZCard = React.memo(({ data }) => {
 });
 
 const styles = StyleSheet.create({
-  wrapper: { marginVertical: 50 },
-  imageContainer: { flex: 1, alignItems: "center" },
-  image: { flex: 1, height: 150 }
+  wrapper: { borderWidth: 1, marginVertical: 20, backgroundColor: "#dbdbdb" },
+  titleText: { textAlign: "center", fontSize: 20, paddingVertical: 5 },
+  notImplementedText: { textAlign: "center", fontSize: 10, paddingVertical: 5 }
 });
