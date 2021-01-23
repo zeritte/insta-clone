@@ -20,7 +20,9 @@ export const NavigationService = () => {
   // use memo only runs once the app starts
   useMemo(async () => {
     try {
+      // check if the user has logged in before
       const credentials = await Keychain.getGenericPassword();
+      // if so, log in the user
       if (credentials) dispatch(login(credentials.username, credentials.password));
     } catch (error) {
       captureError(error);
