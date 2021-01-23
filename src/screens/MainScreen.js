@@ -1,28 +1,30 @@
-import React, { useCallback, useState } from "react";
-import {
-  FlatList,
-  Pressable,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import { ActivityIndicator, FlatList, SafeAreaView, StyleSheet } from "react-native";
 import { ZHeader, ZCard, ZSearch } from "../components";
-import { mockData } from "../config";
 
 import { useDispatch, useSelector } from "react-redux";
+import { getData } from "../actions/MainActions";
 
 const MainScreen = () => {
-  const [data, setData] = useState(mockData);
+  const rawData = useSelector(state => state.main.data);
+  const rawDataLoading = useSelector(state => state.main.dataLoading);
+  const [data, setData] = useState([]);
   const [gridView, setGridView] = useState(false);
   const [searchText, setSearchText] = useState("");
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getData());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setData(rawData);
+  }, [rawData]);
+
   const onSearchSubmit = useCallback(() => {
-    setData(mockData.filter(i => i.title.toLowerCase().includes(searchText.toLowerCase())));
+    setData(rawData.filter(i => i.title.toLowerCase().includes(searchText.toLowerCase())));
     setGridView(searchText === "" ? false : true);
-  }, [searchText]);
+  }, [rawData, searchText]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -35,6 +37,9 @@ const MainScreen = () => {
         contentContainerStyle={styles.flexGrow}
         keyExtractor={item => item.key}
         renderItem={({ item }) => <ZCard isGridView={gridView} data={item} />}
+        ListEmptyComponent={() =>
+          rawDataLoading ? <ActivityIndicator size="large" style={{ flex: 1 }} /> : null
+        }
       />
     </SafeAreaView>
   );

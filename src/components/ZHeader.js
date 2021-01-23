@@ -8,7 +8,6 @@ export const ZHeader = React.memo(() => {
   const dispatch = useDispatch();
   return (
     <View style={styles.headerContainer}>
-      <Text>Main Screen</Text>
       <Pressable onPress={() => dispatch(logout())}>
         <Text>Log out</Text>
       </Pressable>
