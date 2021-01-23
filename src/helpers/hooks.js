@@ -11,7 +11,7 @@ export function useDimensions() {
   const [dimensions, setDimensions] = useState(() => ({
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height
-  })); // an arrow function is used in order to prevent it calculated on every render
+  })); // lazy initial state (https://reactjs.org/docs/hooks-reference.html#lazy-initial-state)
   const mounted = useRef(false);
 
   useEffect(() => {
