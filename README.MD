@@ -9,6 +9,9 @@ It is a very simple instagram clone app, uses following technologies:
 - axios
 - eslint & prettier
 - react-native-fast-image
+- react-native-video
+
+The app design is not ideal, however the architecture is well-established and performance optimisations are done.
 
 ## How to run
 
