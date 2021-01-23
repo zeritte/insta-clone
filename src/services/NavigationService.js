@@ -2,14 +2,14 @@ import "react-native-gesture-handler";
 import React, { useMemo } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { useDispatch, useSelector } from "react-redux";
 import * as Keychain from "react-native-keychain";
+import { captureError } from "../helpers";
 
 import LoginScreen from "../screens/LoginScreen";
 import MainScreen from "../screens/MainScreen";
 
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/AuthActions";
-import { captureError } from "../helpers";
 
 const Stack = createStackNavigator();
 
