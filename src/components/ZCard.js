@@ -10,23 +10,30 @@ const scrollViewProps = {
 };
 const viewProps = {};
 
-export const ZCard = React.memo(({ data }) => {
+export const ZCard = React.memo(({ data, isGridView }) => {
   const [galleryIndex, setGalleryIndex] = useState(0);
   const isGallery = data.imageUris.length > 1;
   const WrapperComponent = isGallery ? ScrollView : View; // decide on the wrapper
-  const wrapperProps = isGallery ? scrollViewProps : viewProps; // decide on the wrapper props
+  const wrapperProps = isGallery
+    ? {
+        ...scrollViewProps,
+        onScroll: e => setGalleryIndex(e.nativeEvent.contentOffset.x === 0 ? 0 : 1),
+        scrollEventThrottle: 0
+      }
+    : viewProps; // decide on the wrapper props
+
+  const gridViewStyles = {
+    width: isGridView ? "50%" : "100%",
+    marginVertical: isGridView ? 0 : 10
+  };
 
   return (
-    <View style={styles.wrapper}>
+    <View style={[styles.wrapper, gridViewStyles]}>
       <Text style={styles.titleText}>{data.title}</Text>
-      <WrapperComponent
-        {...wrapperProps}
-        onScroll={e => setGalleryIndex(e.nativeEvent.contentOffset.x === 0 ? 0 : 1)}
-        scrollEventThrottle={0}
-      >
+      <WrapperComponent {...wrapperProps}>
         {data.imageUris.map((uri, idx) => (
           <View key={idx}>
-            <ZImage uri={uri} index={idx} />
+            <ZImage uri={uri} index={idx} isGridView={isGridView} />
           </View>
         ))}
       </WrapperComponent>
@@ -44,7 +51,7 @@ export const ZCard = React.memo(({ data }) => {
 });
 
 const styles = StyleSheet.create({
-  wrapper: { borderWidth: 1, marginVertical: 20, backgroundColor: "#dbdbdb" },
+  wrapper: { borderWidth: 1, backgroundColor: "#dbdbdb" },
   titleText: { textAlign: "center", fontSize: 20, paddingVertical: 5 },
   notImplementedText: { textAlign: "center", fontSize: 10, paddingVertical: 5 },
   dotContainer: { flexDirection: "row", alignSelf: "center" }

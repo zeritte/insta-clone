@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
 import FastImage from "react-native-fast-image";
-import { useOrientation } from "../helpers";
+import { useGridViewWidth } from "../helpers";
 
-export const ZImage = React.memo(({ uri, index }) => {
-  const DIMENSIONS = useOrientation();
+export const ZImage = React.memo(({ uri, index, isGridView }) => {
+  const width = useGridViewWidth(isGridView);
   const [loading, setLoading] = useState(true);
 
   const priority = index === 0 ? FastImage.priority.high : FastImage.priority.low; // images that fill the page first are prioritized
   return (
-    <View style={[styles.imageContainer, { width: DIMENSIONS.width }]}>
+    <View style={[styles.imageContainer, { width }]}>
       {loading && <ActivityIndicator size="large" color="black" style={styles.spinner} />}
       <FastImage
-        style={[styles.image, { width: (DIMENSIONS.width * 2) / 3 }]}
+        style={[styles.image, { width: (width * 2) / 3 }]}
         source={{
           uri,
           priority

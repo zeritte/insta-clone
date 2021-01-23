@@ -7,7 +7,7 @@ export const useOnMount = func => {
   mounted.current = false;
 };
 
-export function useOrientation() {
+export function useDimensions() {
   const [dimensions, setDimensions] = useState(() => ({
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height
@@ -26,4 +26,10 @@ export function useOrientation() {
   }, []);
 
   return dimensions;
+}
+
+export function useGridViewWidth(isGridView) {
+  const DIMENSIONS = useDimensions();
+  const [width] = useState(isGridView ? DIMENSIONS.width / 2 : DIMENSIONS.width);
+  return width;
 }

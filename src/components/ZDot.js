@@ -7,7 +7,7 @@ export const ZDot = React.memo(({ filled, size = 15 }) => (
     style={{
       height: size,
       width: size,
-      backgroundColor: filled ? "blue" : "lightblue",
+      backgroundColor: filled ? "black" : "lightblue",
       borderRadius: size,
       marginRight: 10
     }}
