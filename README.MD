@@ -17,7 +17,7 @@ The app design is not ideal, however the architecture is well-established and pe
 
 1. Clone the repository
 2. Run `yarn install`
-3. Run `npx pod install`
+3. Run `npx pod install` for iOS
 4. Run `yarn ios` for iOS
 5. Run `yarn android` for Android
 
@@ -28,3 +28,5 @@ The app design is not ideal, however the architecture is well-established and pe
 3. Npx
 4. XCode (for iOS)
 5. Android Studio (for Android)
+
+You need to set up your working environment for react native. There are plenty of resources on the net you can follow.
